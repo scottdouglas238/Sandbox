@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="bg-dark">
+        <div class="text-center">
+            <h2 class="display-3" style="color:white">
+                Weather Dashboard
+            </h2>
+        </div>
+
+    </header>
+    <div style="float: left" id="container">
+        <div class="row">
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-search">Search</button>
+                <input id="citySearch" type="text" value="">
+                <div class="row">
+                    <ol>
+                        <div id="cityBtn"></div>
+                    </ol>
+                </div>
+            </div>
+            <div class="col-md-10">
+
+                <div id="results"></div>
+                <div class="row" id="fiveDayForecast"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="script2.js"></script>
+</body>
+
+</html>

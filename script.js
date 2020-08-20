@@ -1,38 +1,61 @@
-$(document).ready(function(){
-    $(".saveBtn").on("click", function(){
-        var value = $(this).siblings(".description").val(); 
-        var time = $(this).parent().attr("id")//id is hour 9 and 10 and
-        localStorage.setItem(time, value);
-    });
-
-    function timeUpdate(){
-        var currentTime = moment().hours()
-        $(".time-block").each(function(){
-            var hourBlock = parseInt($(this).attr("id").split("-")[1])
-            if (hourBlock < currentTime){
-                $(this).addClass("past")
-            } else if(hourBlock === currentTime){
-                $(this).removeClass("past")
-                $(this).addClass("present")
-            } else {
-               $(this).removeClass("past")
-               $(this).removeClass("present")
-               $(this).addClass("future")
-            }
-        })//this will trigger the class of time block
+$(".btn-search").on("click", function (e) {
+    e.preventDefault();
+    let searchTerm = $("#searchTerm").val();
+    let articleNum = $("#numberOfRecords").val();
+    let inputStartYear = $("#startYear").val();
+    if (inputStartYear === "") {
+        startYear = "";
+    } else {
+        startYear = "&begin_date=" + inputStartYear + "0101"
     }
-     timeUpdate()
+    let inputEndYear = $("#endYear").val();
+    if (inputEndYear === "") {
+        endYear = ""
+    } else {
+        endYear = "&end_date=" + inputEndYear + "1231"
+    }
+    
+    let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchTerm + startYear + endYear + "&api-key=ED1VL6lK1MTnpi2Jq1BlwPP5OO6uA6uv"
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+        .then(function (response) {
+            console.log(response)
+            returnedArticles = response.response.docs.slice(0, articleNum)
+            console.log(returnedArticles)
+            for (let i = 0; i < returnedArticles.length; i++) {
+                let article = returnedArticles[i];
+                titleAjax = article.headline.main; // title
+                authorAjax = article.byline.original; // author
+                dateAjax = article.pub_date; // publish date
+                sectionAjax = article.section_name; // section/category
+                linkAjax = article.web_url; // link to article
 
-     $("#hour-9 .description").val(localStorage.getItem("hour-9"))//this is to trigger the time block
-     $("#hour-10 .description").val(localStorage.getItem("hour-10"))
-     $("#hour-11 .description").val(localStorage.getItem("hour-11"))
-     $("#hour-12 .description").val(localStorage.getItem("hour-12"))
-     $("#hour-13 .description").val(localStorage.getItem("hour-13"))
-     $("#hour-14 .description").val(localStorage.getItem("hour-14"))
-     $("#hour-15 .description").val(localStorage.getItem("hour-15"))
-     $("#hour-16 .description").val(localStorage.getItem("hour-16"))
-     $("#hour-17 .description").val(localStorage.getItem("hour-17"))
 
-     $("#currentDay").text(moment().format("MMMM Do, dddd"))
-
+                var card = $("<div>")
+                card.attr("class", "card")
+                var newResult = $("<div>");
+                newResult.attr("id", "new-result")
+                newResult.attr("class", "card-body")
+                //create the card
+                //create various elements of the card
+                var headline = $("<h3>");
+                headline.attr("class", "card-title").text(titleAjax)
+                var author = $("<h3>");
+                author.attr("class", "card-subtitle").text(authorAjax)
+                var section = $("<h3>");
+                section.attr("class", "card-text").text(sectionAjax)
+                var date = $("<h3>")
+                date.attr("class", "card-text").text(dateAjax)
+                var link = $("<a>")
+                link.attr("href", "#")
+                link.attr("class", "card-link").text(linkAjax)
+                //append to the card
+                newResult.append(headline, author, section, date, link)
+                $("#results").append(card)
+                card.append(newResult)
+            // }
+        }
+        )
 })
