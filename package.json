@@ -1,0 +1,28 @@
+{
+  "name": "sandbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scottdouglas238/Sandbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scottdouglas238/Sandbox/issues"
+  },
+  "homepage": "https://github.com/scottdouglas238/Sandbox#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "handlebars": "^4.7.6",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0",
+    "session": "^0.1.0"
+  }
+}
