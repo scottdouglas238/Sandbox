@@ -22,8 +22,8 @@ function createButton(){
         button.addEventListener("click", function(e){
             e.preventDefault()
             sessionStorage.setItem("Picture", this.src)
-            sessionStorage.setItem("")
-            console.log(this.src)
+            console.log(sessionStorage.getItem("Picture", this.src))
+            dude();
         });
         imgButtonDiv.appendChild(button); 
     }
@@ -32,7 +32,7 @@ createButton()
 
 //Dynamically building a card
 function dude(){
-const number = Math.round(Math.random()*3)    
+// const number = Math.round(Math.random()*3)    
 
 let body = document.getElementById("wave")
 
@@ -47,7 +47,7 @@ let aDiv = document.createElement("a");
 colDiv.setAttribute("class", "col-lg-3");
 cardDiv.setAttribute("class", "card");
 cardDiv.setAttribute("style", "width: 18; height: 36");
-imgDiv.setAttribute("src", pictureArray[number]);
+imgDiv.setAttribute("src", sessionStorage.getItem("Picture", this.src));
 imgDiv.setAttribute("class", "card-img-top");
 imgDiv.setAttribute("alt", "...");
 imgDiv.setAttribute("id", "waveImg");
@@ -69,7 +69,7 @@ cardBodyDiv.appendChild(h5Div);
 cardBodyDiv.appendChild(pDiv);
 cardBodyDiv.appendChild(aDiv);
 }
-dude()
+// dude()
 // setInterval(function(){dude()}, 1000)
 
 
