@@ -15,11 +15,19 @@
       <div>
         <h2>Build a card!</h2>
         <form>
-         <p>Choose your picture for your card!</p>
+          <span class="input-group-text" id="basic-addon1">Choose a picture</span>
           <div id = "imgButtonsDiv" class = "col-lg-12"></div>
           <div>
-            <input>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Choose you card's title</span>
+              <input id = "cardTitle" type="text" class="form-control" placeholder="Card Title" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              <div class = "input-group">
+              <span class="input-group-text">Enter Some text for your card</span>
+               <textarea id = "textarea" class="form-control" aria-label="With textarea" placeholder="Enter Text Here"></textarea>
+            </div>
           </div>
+          <button type="submit" id = "formSubmit" class="btn btn-primary">Submit</button>
         </form>
       </div>
      </div>

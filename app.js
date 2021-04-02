@@ -5,11 +5,6 @@ let pictureArray = [
     "https://www.surfertoday.com/images/stories/ocean-breaking-wave.jpg",
     "https://www.sustainability-times.com/wp-content/uploads/thumbs/ocean-photography-waves-water-light-warren-keelan-10-37sclsnc8udvuuxf6t40e8.jpg"
 ] 
-//declaring the wave picture buttons
-let wave1 = pictureArray[0] && false;
-let wave2 = pictureArray[1] && false;
-let wave3 = pictureArray[2] && false;
-let wave4 = pictureArray[3] && false;
 
 //dynamically created img buttons with an event listener for each one
 function createButton(){
@@ -23,16 +18,28 @@ function createButton(){
             e.preventDefault()
             sessionStorage.setItem("Picture", this.src)
             console.log(sessionStorage.getItem("Picture", this.src))
-            dude();
         });
         imgButtonDiv.appendChild(button); 
     }
 }
+//Calling the function on page load
 createButton()
+
+//Upon submitting the form, the picture chosen, card title, and text entered by the user will get stored in
+//session storage. Then, the function to build the card will be called and the card will be created
+function formSubmit() {
+    const submitForm = document.getElementById("formSubmit");
+    submitForm.addEventListener("click", function(e) {
+        sessionStorage.setItem("Card Title", document.getElementById("cardTitle").value);
+        sessionStorage.setItem("Card Text", document.getElementById("textarea").value);
+        e.preventDefault()
+        dude()
+    })
+}
+formSubmit()
 
 //Dynamically building a card
 function dude(){
-// const number = Math.round(Math.random()*3)    
 
 let body = document.getElementById("wave")
 
@@ -44,7 +51,7 @@ let h5Div = document.createElement("h5");
 let pDiv = document.createElement("p");
 let aDiv = document.createElement("a");
 
-colDiv.setAttribute("class", "col-lg-3");
+colDiv.setAttribute("class", "col-lg-3 cards");
 cardDiv.setAttribute("class", "card");
 cardDiv.setAttribute("style", "width: 18; height: 36");
 imgDiv.setAttribute("src", sessionStorage.getItem("Picture", this.src));
@@ -53,10 +60,10 @@ imgDiv.setAttribute("alt", "...");
 imgDiv.setAttribute("id", "waveImg");
 cardBodyDiv.setAttribute("class", "card-body");
 h5Div.setAttribute("class", "card-title");
-h5Div.appendChild(document.createTextNode("Card title"))
+h5Div.appendChild(document.createTextNode(sessionStorage.getItem("Card Title", document.getElementById("cardTitle"))))
 pDiv.setAttribute("class", "card-text");
 pDiv.setAttribute("class", "card-text");
-pDiv.appendChild(document.createTextNode("Some quick example text to build on the card title and make up the bulk of the card's content."))
+pDiv.appendChild(document.createTextNode(sessionStorage.getItem("Card Text", document.getElementById("textarea"))))
 aDiv.setAttribute("href", "#");
 aDiv.setAttribute("class", "btn btn-primary");
 aDiv.appendChild(document.createTextNode("Go Somewhere"))
@@ -69,7 +76,6 @@ cardBodyDiv.appendChild(h5Div);
 cardBodyDiv.appendChild(pDiv);
 cardBodyDiv.appendChild(aDiv);
 }
-// dude()
-// setInterval(function(){dude()}, 1000)
+
 
 
