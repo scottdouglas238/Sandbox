@@ -27,13 +27,17 @@ createButton()
 
 //Upon submitting the form, the picture chosen, card title, and text entered by the user will get stored in
 //session storage. Then, the function to build the card will be called and the card will be created
+//Here I did no use variables because I wanted to make the code as optimized as possible
 function formSubmit() {
     const submitForm = document.getElementById("formSubmit");
     submitForm.addEventListener("click", function(e) {
+        e.preventDefault()
         sessionStorage.setItem("Card Title", document.getElementById("cardTitle").value);
         sessionStorage.setItem("Card Text", document.getElementById("textarea").value);
-        e.preventDefault()
         dude()
+        document.getElementById("cardTitle").value = ''
+        document.getElementById("textarea").value = ''
+
     })
 }
 formSubmit()
@@ -76,6 +80,7 @@ cardBodyDiv.appendChild(h5Div);
 cardBodyDiv.appendChild(pDiv);
 cardBodyDiv.appendChild(aDiv);
 }
+
 
 
 
