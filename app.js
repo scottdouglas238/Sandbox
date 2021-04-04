@@ -31,12 +31,17 @@ createButton()
 function formSubmit() {
     const submitForm = document.getElementById("formSubmit");
     submitForm.addEventListener("click", function(e) {
+        const buttonChoiceIndex = document.getElementById("buttonChoice").selectedIndex; 
+        const buttonOptions = document.getElementById("buttonChoice").options; 
         e.preventDefault()
         sessionStorage.setItem("Card Title", document.getElementById("cardTitle").value);
         sessionStorage.setItem("Card Text", document.getElementById("textarea").value);
+        sessionStorage.setItem("Button Choice", document.getElementById("buttonChoice").value);
+        console.log(buttonOptions[buttonChoiceIndex].value);
         dude()
         document.getElementById("cardTitle").value = ''
         document.getElementById("textarea").value = ''
+
 
     })
 }
@@ -64,12 +69,12 @@ imgDiv.setAttribute("alt", "...");
 imgDiv.setAttribute("id", "waveImg");
 cardBodyDiv.setAttribute("class", "card-body");
 h5Div.setAttribute("class", "card-title");
-h5Div.appendChild(document.createTextNode(sessionStorage.getItem("Card Title", document.getElementById("cardTitle"))))
+h5Div.appendChild(document.createTextNode(sessionStorage.getItem("Card Title", document.getElementById("cardTitle"))));
 pDiv.setAttribute("class", "card-text");
 pDiv.setAttribute("class", "card-text");
-pDiv.appendChild(document.createTextNode(sessionStorage.getItem("Card Text", document.getElementById("textarea"))))
+pDiv.appendChild(document.createTextNode(sessionStorage.getItem("Card Text", document.getElementById("textarea"))));
 aDiv.setAttribute("href", "#");
-aDiv.setAttribute("class", "btn btn-primary");
+aDiv.setAttribute("class", sessionStorage.getItem("Button Choice", document.getElementById("buttonChoice")));
 aDiv.appendChild(document.createTextNode("Go Somewhere"))
 
 body.appendChild(colDiv)
@@ -80,7 +85,4 @@ cardBodyDiv.appendChild(h5Div);
 cardBodyDiv.appendChild(pDiv);
 cardBodyDiv.appendChild(aDiv);
 }
-
-
-
 
